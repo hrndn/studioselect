@@ -14,18 +14,17 @@ contract Owned {
         owner = msg.sender;
     }
     
-    modifier isOwner {
+    modifier onlyOwner {
         require(owner == msg.sender);
         _;
     }
     
     function changeOwner(address newOwner)
-    isOwner
+    onlyOwner
     returns (bool success)
     {
         require(newOwner != 0);
         LogNewOwner(owner, newOwner);
-        
         owner = newOwner;
         
         return true;
